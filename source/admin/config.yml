@@ -1,0 +1,59 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "source/images"
+public_folder: "/images"
+
+site_url: https://fluffy-wisp-8111b3.netlify.app
+display_url: https://fluffy-wisp-8111b3.netlify.app
+logo_url: https://fluffy-wisp-8111b3.netlify.app/favicon.ico
+
+slug:
+  encoding: "ascii"
+  clean_accents: true
+  sanitize_replacement: "-"
+
+collections:
+  - name: "posts"
+    label: "文章管理"
+    label_singular: "文章"
+    folder: "source/_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - {label: "标题", name: "title", widget: "string"}
+      - {label: "发布日期", name: "date", widget: "datetime", format: "YYYY-MM-DD HH:mm:ss", date_format: "YYYY-MM-DD", time_format: "HH:mm:ss", default: "{{now}}"}
+      - {label: "分类", name: "categories", widget: "list", required: false}
+      - {label: "标签", name: "tags", widget: "list", required: false}
+      - {label: "正文", name: "body", widget: "markdown"}
+
+  - name: "pages"
+    label: "独立页面"
+    folder: "source"
+    create: true
+    filter: {field: "layout", value: "page"}
+    editor:
+      preview: false
+    fields:
+      - {label: "标题", name: "title", widget: "string"}
+      - {label: "发布日期", name: "date", widget: "datetime", format: "YYYY-MM-DD HH:mm:ss", default: "{{now}}"}
+      - {label: "正文", name: "body", widget: "markdown"}
+
+  - name: "config"
+    label: "站点配置"
+    editor:
+      preview: false
+    files:
+      - label: "主题配置"
+        name: "theme"
+        file: "_config.anzhiyu.yml"
+        fields:
+          - {label: "配置内容", name: "body", widget: "code", default_language: "yaml"}
+      - label: "站点配置"
+        name: "site"
+        file: "_config.yml"
+        fields:
+          - {label: "配置内容", name: "body", widget: "code", default_language: "yaml"}
