@@ -103,4 +103,8 @@ theme: anzhiyu
 deploy:
   type: ''
 
+# hexo-admin 在线编辑
+admin:
+  deployCommand: 'git add -A && git commit -m "deploy from admin" && git push origin main'
+
 
